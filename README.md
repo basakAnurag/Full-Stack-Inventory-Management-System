@@ -20,7 +20,7 @@ The system securely manages user sessions and records **purchase history** to tr
 * Product purchasing system
 * Purchase history tracking
 * Low stock warnings
-* SQLite database storage with automatic initialization^^
+* SQLite database storage with automatic initialization
 
 ## Database Structure
 
@@ -106,7 +106,7 @@ The backend relies on Flask; all other modules (SQLite3, Hashlib, Datetime) use 
 **Bash**
 
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ### 3. Run the application
@@ -116,7 +116,7 @@ Start the Flask development server:
 **Bash**
 
 ```
-python app.py
+python3 app.py
 ```
 
 ### 4. Access the Web App
@@ -154,4 +154,4 @@ http://127.0.0.1:5000
 
 ## Author
 
-Anurag
+Anurag Basak
