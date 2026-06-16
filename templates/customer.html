@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="navbar">
+    <h2>Welcome, {{ session['username'] }} (Customer)</h2>
+    <a href="/logout" class="btn btn-danger">Logout</a>
+</div>
+
+<h3>Available Products</h3>
+{% if products %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Action</th>
+        </tr>
+        {% for p in products %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.name }}</td>
+            <td>${{ "%.2f"|format(p.price) }}</td>
+            <td>
+                {{ p.stock }} 
+                {% if p.stock <= low_stock %} <span class="low-stock">(Low Stock)</span> {% endif %}
+            </td>
+            <td>
+                <form action="/buy/{{ p.id }}" method="POST" style="display:flex; gap:10px;">
+                    <input type="number" name="quantity" min="1" max="{{ p.stock }}" value="1" style="width: 60px;" required>
+                    <button type="submit">Buy</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No products available right now.</p>
+{% endif %}
+
+<h3>My Purchase History</h3>
+{% if history %}
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+        </tr>
+        {% for h in history %}
+        <tr>
+            <td>{{ h.purchase_date }}</td>
+            <td>{{ h.product_name }}</td>
+            <td>{{ h.quantity }}</td>
+            <td>${{ "%.2f"|format(h.total_price) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>You haven't made any purchases yet.</p>
+{% endif %}
+{% endblock %}
