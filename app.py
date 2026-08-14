@@ -5,8 +5,9 @@ from datetime import datetime
 import os
 
 app = Flask(__name__)
-app.secret_key = "qwiuehdwetbci1235614@*#@$^dfwhe"
-DB_NAME = "A3_04_4_1_85.db"
+app.secret_key = os.environ.get("SECRET_KEY")
+os.makedirs(app.instance_path, exist_ok=True) # Instance to run DB
+DB_NAME = os.path.join(app.instance_path, "A3_04_4_1_85.db")
 LOW_STOCK_LIMIT = 5
 
 
