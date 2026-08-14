@@ -26,8 +26,8 @@
                 {% if p.stock <= low_stock %} <span class="low-stock">(Low Stock)</span> {% endif %}
             </td>
             <td>
-                <form action="/buy/{{ p.id }}" method="POST" style="display:flex; gap:10px;">
-                    <input type="number" name="quantity" min="1" max="{{ p.stock }}" value="1" style="width: 60px;" required>
+                <form action="/buy/{{ p.id }}" method="POST" class="inline-form">
+                    <input type="number" name="quantity" min="1" max="{{ p.stock }}" value="1" class="quantity-input" required>
                     <button type="submit">Buy</button>
                 </form>
             </td>

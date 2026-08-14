@@ -5,7 +5,7 @@ from datetime import datetime
 import os
 
 app = Flask(__name__)
-app.secret_key = "super_secret_key_change_in_production"
+app.secret_key = "qwiuehdwetbci1235614@*#@$^dfwhe"
 DB_NAME = "A3_04_4_1_85.db"
 LOW_STOCK_LIMIT = 5
 
