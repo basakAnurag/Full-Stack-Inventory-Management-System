@@ -1,261 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Management System</title>
     <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+        margin: 0;
+        padding: 20px;
+        color: #222;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border: 1px solid #ddd;
+    }
+
+    h1, h2, h3 {
+        color: #222;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .flash {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+    }
+
+    .flash.success {
+        background: #e8f5e9;
+        color: #256029;
+    }
+
+    .flash.error {
+        background: #ffebee;
+        color: #8a1c1c;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 25px;
+    }
+
+    th,
+    td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background: #eee;
+    }
+
+    tr:nth-child(even) {
+        background: #fafafa;
+    }
+
+    .low-stock {
+        color: #c62828;
+        font-weight: bold;
+    }
+
+    button,
+    .btn {
+        background: #333;
+        color: white;
+        border: none;
+        padding: 7px 12px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 14px;
+        display: inline-block;
+    }
+
+    button:hover,
+    .btn:hover {
+        background: #555;
+    }
+
+    .btn-danger {
+        background: #b3261e;
+    }
+
+    .btn-danger:hover {
+        background: #8f1d18;
+    }
+
+    .form-group {
+        margin-bottom: 12px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 4px;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #bbb;
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .full-button {
+        width: 100%;
+    }
+
+    .register-button {
+        background: #2e7d32;
+    }
+
+    .register-button:hover {
+        background: #256628;
+    }
+
+    .inline-form {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .quantity-input {
+        width: 60px;
+    }
+
+    .small-input {
+        width: 80px;
+    }
+
+    .add-product {
+        background: #f7f7f7;
+        padding: 15px;
+        border: 1px solid #ccc;
+        margin-bottom: 25px;
+    }
+
+    .product-form {
+        display: flex;
+        gap: 12px;
+        align-items: flex-end;
+    }
+
+    .product-name {
+        margin: 0;
+        flex: 2;
+    }
+
+    .product-field {
+        margin: 0;
+        flex: 1;
+    }
+
+    .split-screen {
+        display: flex;
+        gap: 20px;
+    }
+
+    .half {
+        flex: 1;
+        padding: 15px;
+        border: 1px solid #ccc;
+        min-width: 0;
+    }
+
+    /* -------------------------
+       Tablet
+       ------------------------- */
+
+    @media (max-width: 700px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .split-screen {
+        display: block;
+    }
+
+    .half {
+        margin-bottom: 15px;
+    }
+
+    .product-form {
+        display: block;
+    }
+
+    .product-name,
+    .product-field {
+        margin-bottom: 12px;
+    }
+
+    .inline-form {
+        flex-wrap: wrap;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+    /* -------------------------
+       Mobile
+       ------------------------- */
+
+    @media (max-width: 480px) {
         body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            margin: 0;
-            padding: 20px;
-            color: #222;
+            padding: 0;
+            background: white;
         }
 
         .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border: 1px solid #ddd;
-        }
-
-        h1, h2, h3 {
-            color: #222;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        .flash {
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-        }
-
-        .flash.success {
-            background: #e8f5e9;
-            color: #256029;
-        }
-
-        .flash.error {
-            background: #ffebee;
-            color: #8a1c1c;
-        }
-
-        table {
             width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 25px;
-        }
-
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background: #eee;
-        }
-
-        tr:nth-child(even) {
-            background: #fafafa;
-        }
-
-        .low-stock {
-            color: #c62828;
-            font-weight: bold;
-        }
-
-        button, .btn {
-            background: #333;
-            color: white;
             border: none;
-            padding: 7px 12px;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 14px;
+            padding: 12px;
         }
 
-        button:hover, .btn:hover {
-            background: #555;
+        h1 {
+            font-size: 24px;
         }
 
-        .btn-danger {
-            background: #b3261e;
+        h2 {
+            font-size: 20px;
         }
 
-        .btn-danger:hover {
-            background: #8f1d18;
-        }
-
-        .form-group {
-            margin-bottom: 12px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 4px;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 7px;
-            border: 1px solid #bbb;
-            box-sizing: border-box;
+        h3 {
+            font-size: 18px;
         }
 
         .page-header {
-            text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 18px;
+        }
+
+        button,
+        .btn {
+            min-height: 40px;
+            padding: 9px 12px;
         }
 
         .full-button {
             width: 100%;
         }
 
-        .register-button {
-            background: #2e7d32;
+        /* Prevent tables from destroying the page width */
+        table {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
         }
 
-        .register-button:hover {
-            background: #256628;
+        th,
+        td {
+            padding: 8px;
         }
 
+        /* Forms become full width */
         .inline-form {
+            width: 100%;
             display: flex;
-            gap: 8px;
-            align-items: center;
+            flex-direction: column;
+            align-items: stretch;
         }
 
-        .quantity-input {
-            width: 60px;
-        }
-
-        .small-input {
-            width: 80px;
-        }
-
-        .add-product {
-            background: #f7f7f7;
-            padding: 15px;
-            border: 1px solid #ccc;
-            margin-bottom: 25px;
-        }
-
-        .product-form {
-            display: flex;
-            gap: 12px;
-            align-items: flex-end;
-        }
-
-        .product-name {
-            margin: 0;
-            flex: 2;
-        }
-
-        .product-field {
-            margin: 0;
-            flex: 1;
-        }
-
-        .split-screen {
-            display: flex;
-            gap: 20px;
-        }
-
-        .half {
-            flex: 1;
-            padding: 15px;
-            border: 1px solid #ccc;
-        }
-
-        @media (max-width: 700px) {
-            .page-header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .full-button {
+        .inline-form input,
+        .inline-form select,
+        .inline-form button,
+        .inline-form .btn {
             width: 100%;
         }
 
-        .register-button {
-            background: #2e7d32;
-        }
-
-        .register-button:hover {
-            background: #256628;
-        }
-
-        .inline-form {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .quantity-input {
-            width: 60px;
-        }
-
+        .quantity-input,
         .small-input {
-            width: 80px;
+            width: 100%;
         }
 
         .add-product {
-            background: #f7f7f7;
-            padding: 15px;
-            border: 1px solid #ccc;
-            margin-bottom: 25px;
+            padding: 12px;
         }
 
         .product-form {
-            display: flex;
-            gap: 12px;
-            align-items: flex-end;
+            display: block;
         }
 
-        .product-name {
-            margin: 0;
-            flex: 2;
-        }
-
+        .product-name,
         .product-field {
-            margin: 0;
-            flex: 1;
+            width: 100%;
+            margin-bottom: 12px;
         }
 
-        .split-screen {
-                display: block;
-            }
-
-            .half {
-                margin-bottom: 15px;
-            }
-
-            .product-form {
-                display: block;
-            }
-
-            .product-name,
-            .product-field {
-                margin-bottom: 12px;
-            }
-
-            .inline-form {
-                flex-wrap: wrap;
-            }
+        .product-form button {
+            width: 100%;
         }
-    </style>
+
+        .flash {
+            font-size: 14px;
+        }
+    }
+</style>
 </head>
 <body>
 
