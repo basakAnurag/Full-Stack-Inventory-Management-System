@@ -12,7 +12,7 @@ LOW_STOCK_LIMIT = 5
 
 
 def get_connection():
-    conn = sqlite3.connect(DB_NAME)
+    conn = sqlite3.connect(DB_NAME, timeout=10)
     conn.row_factory = sqlite3.Row  # Allows dictionary-like access to rows
     return conn
 
@@ -127,12 +127,13 @@ def register():
         session["user_id"] = cursor.lastrowid
         session["username"] = username
         session["role"] = role
-        conn.close()
         flash("Account created successfully!", "success")
         return redirect(url_for(role))
     except sqlite3.IntegrityError:
         flash("Username already taken!", "error")
         return redirect(url_for("index"))
+    finally:
+        conn.close()
 
 
 @app.route("/logout")
