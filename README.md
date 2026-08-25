@@ -152,10 +152,6 @@ http://127.0.0.1:5000
 * HTML5 & CSS3 (Frontend Styling & Structure)
 * Jinja2 (Dynamic Template Rendering)
 
-## Live at
-
-`https://full-stack-inventory-management-system-3w50.onrender.com`
-
 ## Author
 
 Anurag Basak
